@@ -350,6 +350,7 @@ small {
 
 .grid-container {
   display: grid;
+  width: 100px;
   grid-template-rows: auto auto; /* Two rows */
   grid-template-columns: repeat(3, 1fr); /* Three columns */
   gap: 10px; /* Adjust the gap between items if needed */
@@ -381,3 +382,4 @@ small {
   align-items: center; /* Adjust as needed */
   padding: 10px;
 }
+

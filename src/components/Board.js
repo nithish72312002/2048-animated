@@ -7,7 +7,7 @@ import GameOverlay from './GameOverlay';
 import { Board } from '../helper';
 import { ConnectWallet, useAddress, useContract } from '@thirdweb-dev/react';
 import { abi } from "./abi";
-
+import Eventbox from './eventbox';
 const customStyles = {
   content: {
     position: 'absolute',
@@ -48,13 +48,18 @@ export default function BoardView() {
     if (board.hasWon() || loading) {
       return;
     }
-
+  
     setLoading(true);
-
+  
     try {
-      const directionMap = ['up', 'right', 'down', 'left'];
-      const data = await contract.call("recordButtonPress", [directionMap[direction]]);
+      const directionMap = ['left', 'up', 'right', 'down'];
+      const directionValue = directionMap[direction];
+  
+      console.log('Button direction:', direction, 'Mapped value:', directionValue);
+  
+      const data = await contract.call("recordButtonPress", [directionValue]);
       console.log('Button press recorded:', data);
+  
       let boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
       let newBoard = boardClone.move(direction);
       setBoard(newBoard);
@@ -90,8 +95,9 @@ export default function BoardView() {
           <div className='score-box'>
             <div className='score-header'>SCORE</div>
             <div>{board.score}</div>
-            <ConnectWallet/>
           </div>
+          <ConnectWallet/>
+
         </div>
 <div className='keyboard'>
         <div className='board'>
@@ -109,6 +115,7 @@ export default function BoardView() {
             ))}
           <GameOverlay onRestart={resetGame} board={board} />
         </div>
+        <div> <Eventbox/>
         <div className="grid-container">
         <button className="grid-item" onClick={() => handleDirectionClick(1)} disabled={loading} style={{ cursor: 'pointer' }}
 >
@@ -127,7 +134,7 @@ export default function BoardView() {
           →
         </button>
       </div>
-      
+      </div>
     </div>
       </div>
       {modalIsOpen && (
