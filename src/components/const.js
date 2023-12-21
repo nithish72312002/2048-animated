@@ -1,0 +1,1 @@
+export const explorerlink = "https://explorer.jupiternft.xyz"
