@@ -8,7 +8,6 @@ import { Board } from '../helper';
 import { ConnectWallet, useAddress, useContract } from '@thirdweb-dev/react';
 import { abi } from "./abi";
 
-
 const customStyles = {
   content: {
     position: 'absolute',
@@ -30,8 +29,10 @@ Modal.setAppElement('#root');
 export default function BoardView() {
   const [board, setBoard] = useState(new Board());
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const year = new Date().getFullYear(); // Add this line to define 'year'
-
+  const year = new Date().getFullYear();
+  const contractAddress = '0x4AF71ce8676c24258eDb5a096bACaA3C6ab6a402';
+  const { contract } = useContract(contractAddress, abi);
+  const address = useAddress();
 
   const openModal = () => {
     setIsOpen(true);
@@ -41,32 +42,27 @@ export default function BoardView() {
     setIsOpen(false);
   };
 
-  const handleDirectionClick = (direction) => {
-    if (board.hasWon()) {
+  const [loading, setLoading] = useState(false);
+
+  const handleDirectionClick = async (direction) => {
+    if (board.hasWon() || loading) {
       return;
     }
 
-    let adjustedDirection;
-    switch (direction) {
-      case 0: // Up
-        adjustedDirection = 0;
-        break;
-      case 1: // Right
-        adjustedDirection = 1;
-        break;
-      case 2: // Down
-        adjustedDirection = 2;
-        break;
-      case 3: // Left
-        adjustedDirection = 3;
-        break;
-      default:
-        adjustedDirection = direction;
-    }
+    setLoading(true);
 
-    let boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
-    let newBoard = boardClone.move(adjustedDirection);
-    setBoard(newBoard);
+    try {
+      const directionMap = ['up', 'right', 'down', 'left'];
+      const data = await contract.call("recordButtonPress", [directionMap[direction]]);
+      console.log('Button press recorded:', data);
+      let boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
+      let newBoard = boardClone.move(direction);
+      setBoard(newBoard);
+    } catch (error) {
+      console.error('Error recording button press:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -77,59 +73,7 @@ export default function BoardView() {
     setBoard(new Board());
   };
 
-
-
-  const contractAddress = '0x4AF71ce8676c24258eDb5a096bACaA3C6ab6a402';
-  const { contract } = useContract(contractAddress, abi);
-  const address = useAddress();
-
-  const handleRecordButtonPressup = async () => {
-    try {
-      // Assuming 'recordButtonPress' is a method in your smart contract ABI
-      const data = await contract.call("recordButtonPress", ["up"]);
-      console.log('Button press recorded:', data);
-      // After the transaction is successful, update the game board
-      handleDirectionClick(1);
-    } catch (error) {
-      console.error('Error recording button press:', error);
-    }
-  };
-
-  const handleRecordButtonPressleft = async () => {
-    try {
-      // Assuming 'recordButtonPress' is a method in your smart contract ABI
-      const data = await contract.call("recordButtonPress", ["left"]);
-      console.log('Button press recorded:', data);
-      // After the transaction is successful, update the game board
-      handleDirectionClick(0);
-    } catch (error) {
-      console.error('Error recording button press:', error);
-    }
-  };
-
-  const handleRecordButtonPressdown = async () => {
-    try {
-      // Assuming 'recordButtonPress' is a method in your smart contract ABI
-      const data = await contract.call("recordButtonPress", ["down"]);
-      console.log('Button press recorded:', data);
-      // After the transaction is successful, update the game board
-      handleDirectionClick(3);
-    } catch (error) {
-      console.error('Error recording button press:', error);
-    }
-  };
-
-  const handleRecordButtonPressright = async () => {
-    try {
-      // Assuming 'recordButtonPress' is a method in your smart contract ABI
-      const data = await contract.call("recordButtonPress", ["right"]);
-      console.log('Button press recorded:', data);
-      // After the transaction is successful, update the game board
-      handleDirectionClick(2);
-    } catch (error) {
-      console.error('Error recording button press:', error);
-    }
-  };
+ 
 
   return (
     <div>
@@ -166,13 +110,22 @@ export default function BoardView() {
           <GameOverlay onRestart={resetGame} board={board} />
         </div>
         <div className="grid-container">
-      {/* First row, first item (spans all three columns) */}
-      <button className="grid-item"onClick={handleRecordButtonPressup}>↑</button>
-
-      {/* Second row, three items (one in each column) */}
-      <button className="grid-item"onClick={handleRecordButtonPressleft}>←</button>
-      <button className="grid-item" onClick={handleRecordButtonPressdown }>↓</button>
-      <button className="grid-item" onClick={handleRecordButtonPressright}>→</button>
+        <button className="grid-item" onClick={() => handleDirectionClick(1)} disabled={loading} style={{ cursor: 'pointer' }}
+>
+          ↑
+        </button>
+        <button className="grid-item" onClick={() => handleDirectionClick(0)} disabled={loading} style={{ cursor: 'pointer' }}
+>
+          ←
+        </button>
+        <button className="grid-item" onClick={() => handleDirectionClick(3)} disabled={loading} style={{ cursor: 'pointer' }}
+>
+          ↓
+        </button>
+        <button className="grid-item" onClick={() => handleDirectionClick(2)} disabled={loading} style={{ cursor: 'pointer' }}
+>
+          →
+        </button>
       </div>
       
     </div>
