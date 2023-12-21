@@ -33,7 +33,7 @@ body {
 }
 
 .board {
-  order: 1;
+  order: 0;
   width: 440px;
   height: 440px;
   padding: 5px;
@@ -332,4 +332,52 @@ small {
 
 .overlay .message {
   color: #666;
+}
+
+/* Board.css */
+
+
+
+/* Style for DirectionButton (assuming it's a simple button) */
+.direction-button {
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-rows: auto auto; /* Two rows */
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  gap: 10px; /* Adjust the gap between items if needed */
+}
+
+/* Style for items in the grid */
+.grid-item {
+  order: 2;
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  width:  10px;
+  height: 10px;
+}
+
+/* Make the first item span all three columns in the first row */
+.grid-item:first-child {
+  grid-column: 2 / span 2; /* Start from the second column and span 2 columns */
+}
+
+.grid-item:nth-child(2) {
+  grid-column: 1; /* Start from the second column */
+}
+
+.keyboard{
+  display: flex;
+  column-gap: 50px;
+  justify-content: space-between; /* Adjust as needed */
+  align-items: center; /* Adjust as needed */
+  padding: 10px;
 }
