@@ -8,6 +8,7 @@ import { Board } from '../helper';
 import { ConnectWallet, useAddress, useContract } from '@thirdweb-dev/react';
 import { abi } from "./abi";
 import Eventbox from './eventbox';
+
 const customStyles = {
   content: {
     position: 'absolute',
@@ -92,14 +93,11 @@ export default function BoardView() {
               Game Rules
             </div>
           </div>
-          <div className='score-box'>
-            <div className='score-header'>SCORE</div>
-            <div>{board.score}</div>
-          </div>
+          
           <ConnectWallet/>
 
         </div>
-<div className='keyboard'>
+        <div className='keyboard'>
         <div className='board'>
           {board.cells.map((row, rowIndex) => (
             <div key={rowIndex}>
@@ -115,7 +113,12 @@ export default function BoardView() {
             ))}
           <GameOverlay onRestart={resetGame} board={board} />
         </div>
-        <div> <Eventbox/>
+        <div> 
+          <div className='score-box'>
+            <div className='score-header'>SCORE</div>
+            <div>{board.score}</div>
+          </div>
+          <Eventbox/>
         <div className="grid-container">
         <button className="grid-item" onClick={() => handleDirectionClick(1)} disabled={loading} style={{ cursor: 'pointer' }}
 >
@@ -160,7 +163,7 @@ export default function BoardView() {
                                 <p>
                                 <small>&copy; Copyright {year}</small>
                                 </p>
-                                <div className='resetButton' onClick={closeModal}>Cancel</div>
+                                <div className='resetButton' onClick={closeModal}>Close</div>
                             </div>  
                     </div>
         </Modal>

@@ -22,7 +22,7 @@ export default function Eventbox() {
   );
 
   return (
-    <div style={{ width: "300px", fontSize: "sm", height: "200px", overflowY: "scroll" , border: "2px solid #000", padding: "5px", marginBottom: "10px"}}>
+    <div style={{ width: "300px", fontSize: "sm", height: "200px", overflowY: "scroll" , border: "2px solid #000", padding: "5px", marginBottom: "10px", marginTop: "20px"}}>
     <h2>All Moves</h2>
     {isLoading && <p>Loading events...</p>}
     {isError && <p>Error loading events</p>}

@@ -12,7 +12,7 @@ import './styles.scss';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThirdwebProvider
-      clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
+      clientId="c609a6f3e01bda96930a5cf48166d120"
       activeChain={{
         // === Required information for connecting to the network === \\
         chainId: 5504686, // Chain ID of the network

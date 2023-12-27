@@ -149,6 +149,8 @@ body {
 .buttons {
   display: flex;
   margin-right: 20px;
+  margin-left: 280px;
+  gap: 20px;
 }
 
 .copyright {
@@ -351,6 +353,8 @@ small {
 .grid-container {
   display: grid;
   width: 100px;
+  margin-left: 40px;
+  margin-top: 20px;
   grid-template-rows: auto auto; /* Two rows */
   grid-template-columns: repeat(3, 1fr); /* Three columns */
   gap: 10px; /* Adjust the gap between items if needed */
@@ -383,3 +387,29 @@ small {
   padding: 10px;
 }
 
+.login-page {
+  height: 100vh; /* 100% of the viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  font-family: 'Arial', sans-serif; /* Choose a font */
+}
+
+.login-page h1 {
+  margin-bottom: 20px; /* Some spacing below the title */
+}
+
+/* Add more styling as needed */
+/* Navbar.css */
+.navbar {
+  width: 100%;
+  background-color: #333; /* Dark background color for navbar */
+  color: #fff; /* Text color */
+  padding: 10px 20px; /* Padding for content inside navbar */
+  font-family: 'Arial', sans-serif; /* Choose a font */
+}
+
+.navbar-brand {
+  font-size: 24px; /* Example font size for the brand */
+}
