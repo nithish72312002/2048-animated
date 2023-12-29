@@ -12,26 +12,20 @@ function App() {
 
   useEffect(() => {
     const fetchBalance = async () => {
-      try {
-        if (typeof balanceQuery.data?.displayValue === "undefined") {
-          setBalance(0);
-          setIsLoggedIn(false); // No balance means user is not logged in or has insufficient balance
-        } else {
-          const tokenBalance = await balanceQuery.data.displayValue;
-          const parsedBalance = parseInt(tokenBalance);
-          setBalance(parsedBalance);
-          if (parsedBalance > 0) {
-            setIsLoggedIn(true); // Set isLoggedIn to true if balance > 0
-          } else {
-            setIsLoggedIn(false); // If balance is 0, user remains logged out
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching balance:", error);
+      if (typeof balanceQuery.data?.displayValue === "undefined") {
+        setBalance(0);
+      } else {
+        const tokenBalance = await balanceQuery.data.displayValue;
+        setBalance(parseInt(tokenBalance));
       }
     };
     fetchBalance();
   }, [address, balanceQuery]);
+  
+  // Set isLoggedIn based on balance
+  useEffect(() => {
+    setIsLoggedIn(balance >= 1);
+  }, [balance]);
 
   return (
     <>
