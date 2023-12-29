@@ -57,6 +57,7 @@ body {
   margin: 15px auto;
   position: relative;
   width: 90%; 
+  flex-direction: column; /* This will stack children vertically */
 }
 
 .fixed-container {
@@ -149,8 +150,12 @@ body {
 .buttons {
   display: flex;
   margin-right: 20px;
-  margin-left: 280px;
+  justify-content: center; /* Horizontally centering the items */
+  align-items: center; 
   gap: 20px;
+  height: 100%;  
+  margin-left: 20px;          /* Set the height to 100% if you want to center vertically */
+
 }
 
 .copyright {

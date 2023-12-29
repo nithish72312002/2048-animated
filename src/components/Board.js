@@ -92,10 +92,11 @@ export default function BoardView() {
             <div className='resetButton' onClick={openModal}>
               Game Rules
             </div>
+            <div style={{ marginLeft: "200px"}}>
+          <ConnectWallet />
+          </div>
           </div>
           
-          <ConnectWallet/>
-
         </div>
         <div className='keyboard'>
         <div className='board'>
