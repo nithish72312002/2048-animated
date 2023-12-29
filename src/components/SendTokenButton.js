@@ -37,7 +37,7 @@ const SendTokenButton = () => {
     };
 
     return (
-        <button style={{width:"200px", height: "30px" ,borderRadius: "20px", cursor: "pointer"}} onClick={handleSendToken}>Send Token</button>
+        <button style={{width:"200px", height: "40px" ,borderRadius: "20px", cursor: "pointer"}} onClick={handleSendToken}>Faucet</button>
     );
 };
 
