@@ -8,6 +8,7 @@ import { Board } from '../helper';
 import { ConnectWallet, useAddress, useContract } from '@thirdweb-dev/react';
 import { abi } from "./abi";
 import Eventbox from './eventbox';
+import { buttonrecorderca } from './const';
 
 const customStyles = {
   content: {
@@ -31,7 +32,7 @@ export default function BoardView() {
   const [board, setBoard] = useState(new Board());
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const year = new Date().getFullYear();
-  const contractAddress = '0x4AF71ce8676c24258eDb5a096bACaA3C6ab6a402';
+  const contractAddress = buttonrecorderca;
   const { contract } = useContract(contractAddress, abi);
   const address = useAddress();
 

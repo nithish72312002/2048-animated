@@ -1,9 +1,9 @@
 import { useAddress, useContract, useContractEvents } from "@thirdweb-dev/react";
 import { abi } from "./abi";
-import {explorerlink} from "./const";
+import {buttonrecorderca, explorerlink} from "./const";
 
 export default function Eventbox() {
-  const contractAddress = '0x4AF71ce8676c24258eDb5a096bACaA3C6ab6a402';
+  const contractAddress = buttonrecorderca;
   const { contract } = useContract(contractAddress, abi);
   const address = useAddress();
 

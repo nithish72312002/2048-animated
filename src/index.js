@@ -15,7 +15,7 @@ root.render(
       clientId="c609a6f3e01bda96930a5cf48166d120"
       activeChain={{
         // === Required information for connecting to the network === \\
-        chainId: 5504686, // Chain ID of the network
+        chainId: 6833895, // Chain ID of the network
         // Array of RPC URLs to use
         rpc: ["https://evmrpc.jupiternft.xyz/"],
 
