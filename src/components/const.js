@@ -1,2 +1,2 @@
 export const explorerlink = "https://explorer.jupiternft.xyz"
-export const buttonrecorderca = '0xFDCbFCce65e044A1c333d0dfF6A88B3be18a1FE5'
+export const buttonrecorderca = '0x2efDa8175bC14B94088840FF4fc25E641fb0Db6C'

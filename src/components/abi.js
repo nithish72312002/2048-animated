@@ -27,6 +27,19 @@ export const abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "button",
+				"type": "string"
+			}
+		],
+		"name": "recordButtonPress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "userAddress",
 				"type": "address"
@@ -54,19 +67,6 @@ export const abi = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "button",
-				"type": "string"
-			}
-		],
-		"name": "recordButtonPress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ];
