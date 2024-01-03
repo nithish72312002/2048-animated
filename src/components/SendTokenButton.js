@@ -1,21 +1,20 @@
 // SendTokenButton.js
 
 import { useAddress } from '@thirdweb-dev/react';
-import React from 'react';
-// Assuming you have imported your useAddress hook
+import React, { useState } from 'react';
 
 const SendTokenButton = () => {
-    // Get the address using your custom hook
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const address = useAddress();
 
     const handleSendToken = () => {
-        // Data to be sent
+        setIsButtonDisabled(true); // Disable the button on click
+
         const data = {
-            address: address, // Use the dynamically fetched address
+            address: address,
             chain: "C"
         };
 
-        // Replace '0.0.0.0' with the IP address of your server machine
         const serverUrl = process.env.REACT_APP_SERVER_URL;
 
         fetch(serverUrl, {
@@ -25,7 +24,7 @@ const SendTokenButton = () => {
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json()) // assuming the server responds with JSON
+        .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
             // Handle success if needed
@@ -33,11 +32,21 @@ const SendTokenButton = () => {
         .catch((error) => {
             console.error('Error:', error);
             // Handle error if needed
+        })
+        .finally(() => {
+            setIsButtonDisabled(false); // Enable the button after the fetch is complete
+            window.location.reload(); // Refresh the page
         });
     };
 
     return (
-        <button style={{width:"200px", height: "40px" ,borderRadius: "20px", cursor: "pointer"}} onClick={handleSendToken}>Faucet</button>
+        <button
+            className='sendtokenbutton'
+            onClick={handleSendToken}
+            disabled={isButtonDisabled} // Disable the button based on state
+        >
+            Faucet
+        </button>
     );
 };
 

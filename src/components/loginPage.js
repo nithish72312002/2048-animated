@@ -34,21 +34,34 @@ export default function LoginPage() {
         }
     }, [isWalletConnected, balanceQuery]);
 
+    
     return (
         <div className="login-page">
             {!isWalletConnected && (
-                <h1>Welcome to 2048 Game</h1>
+                <h1>2048 Onchain</h1>
             )}
 
             {!isWalletConnected ? (
                 <ConnectWallet 
-                    dropdownPosition={{
-                        side: "right",
-                        align: "center",
-                    }}
-                />
+                btnTitle='Connect'
+                style={{
+                    border: "1px white",
+                    boxShadow: "10px 10px 0px rgb(0, 0, 0)",
+                    transition: "box-shadow 0.3s",
+                    width: "150px",
+                    height: "50px",
+                    backgroundColor: "rgba(255, 107, 85, 1)"
+                }}
+                className='connectbutton'
+                dropdownPosition={{
+                    side: "right",
+                    align: "center",
+                }}
+            />
+              
+              
             ) : balance <= 0 ? (<>
-                <h2>Please fund your wallet in order to play the game.</h2><SendTokenButton/></>
+                <h2>CLICK FAUCET TO FUND YOUR LOCAL WALLET</h2><SendTokenButton/></>
             ) : (
                 <p>Your wallet balance: {balance}</p>
             )}
