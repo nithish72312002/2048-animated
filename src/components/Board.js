@@ -61,7 +61,7 @@ export default function BoardView() {
         let newBoard = boardClone.move(direction);
         setBoard(newBoard);
         setIsMoveInProgress(false);
-      }, 1000);
+      }, 1500);
     } catch (error) {
       console.error('Error recording button press:', error);
       setIsMoveInProgress(false);
